@@ -3,6 +3,9 @@ package study.spring.core.lifecycle;
 import org.springframework.beans.factory.DisposableBean;
 import org.springframework.beans.factory.InitializingBean;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
+
 public class NetworkClient{
 
     private String url;
@@ -32,12 +35,14 @@ public class NetworkClient{
     }
 
     // 초기화 단계에서 호출
+    @PostConstruct
     public void init() throws Exception {
         connect();
         call("초기화 연결 메시지");
     }
 
     // 소면전 단계에서 호출
+    @PreDestroy
     public void close() throws Exception {
         disconnect();
     }
